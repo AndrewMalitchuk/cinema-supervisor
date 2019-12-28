@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">cinema-supervisor</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="loginPromptLoginActivityTextViewString">Cinema Ticket App Demo</string>
+    <string name="signUpPromptSignUpActivityTextViewString">Create new account</string>
+    <string name="loginLoginActivityButtonString">Login</string>
+    <string name="signUpSignUpActivityButtonString">Sign-up</string>
+    <string name="signUpLoginActivityTextViewString"><u>Sign-up?</u></string>
+    <string name="emailLoginActivityTextViewString">Email</string>
+    <string name="emailLoginActivityTextViewStringHint">Your email</string>
+    <string name="passwordLoginActivityTextViewString">Password</string>
+    <string name="passwordLoginActivityTextViewStringHint">Your password</string>
+    <string name="ticketLoginActivityImageViewString">Ticket picture</string>
+    <string name="newAccountSignUpActivityImageViewString">Create new account</string>
+    <string name="loginSignUpActivityTextViewString"><u>Already have an account?</u></string>
+    <string name="connectWithUsAboutActivityString">Connect with us</string>
+    <string name="descriptionAboutActivityString">Description</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
