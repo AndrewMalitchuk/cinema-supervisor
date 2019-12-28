@@ -26,7 +26,7 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.cinema.cinema_supervisor.R;
 import com.google.zxing.Result;
 
-public class ScanQR extends AppCompatActivity {
+public class ScanQRActivity extends AppCompatActivity {
 
     private CodeScanner mCodeScanner;
 
@@ -65,14 +65,14 @@ public class ScanQR extends AppCompatActivity {
 
                 @Override
                 public void onDecoded(@NonNull final Result result) {
-                    ScanQR.this.runOnUiThread(new Runnable() {
+                    ScanQRActivity.this.runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {
                             Intent resultIntent = new Intent();
                             resultIntent.putExtra("barcode", result.getText());
                             resultIntent.putExtra("barType", result.getBarcodeFormat().toString());
-                            setResult(ScanQR.RESULT_OK, resultIntent);
+                            setResult(ScanQRActivity.RESULT_OK, resultIntent);
                             finish();
                         }
                     });
@@ -121,7 +121,7 @@ public class ScanQR extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        ActivityCompat.requestPermissions(ScanQR.this,
+                        ActivityCompat.requestPermissions(ScanQRActivity.this,
                                 new String[]{Manifest.permission.CAMERA},
                                 MY_PERMISSIONS_REQUEST_CAMERA);
 
@@ -149,7 +149,7 @@ public class ScanQR extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        startInstalledAppDetailsActivity(ScanQR.this);
+                        startInstalledAppDetailsActivity(ScanQRActivity.this);
 
                     }
                 });
@@ -170,7 +170,7 @@ public class ScanQR extends AppCompatActivity {
                         if (showRationale) {
                             showAlert();
                         } else if (!showRationale) {
-                            saveToPreferences(ScanQR.this, ALLOW_KEY, true);
+                            saveToPreferences(ScanQRActivity.this, ALLOW_KEY, true);
                         }
                     }
                 }

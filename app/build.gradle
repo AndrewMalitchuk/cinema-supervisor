@@ -53,4 +53,18 @@ dependencies {
     implementation 'com.budiyev.android:code-scanner:2.1.0'
     //
     implementation "com.github.javiersantos:BottomDialogs:1.2.1"
+    //
+    implementation 'com.github.GrenderG:MarkdownView:0.1.2'
+    //
+    implementation 'com.brouding:android-simple-dialog:0.3.1'
+    //
+    implementation 'com.github.droidbyme:DroidDialog:c6decc7167'
+    //
+    implementation 'com.liangfeizc:avatarview:0.0.1@aar'
+    //
+    implementation 'com.github.Pradyuman7:ChocoBar:V1.0'
+    // https://android-arsenal.com/details/1/5219?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+Android_Arsenal+%28The+Android+Arsenal%29
+    implementation 'com.keiferstone:nonet:2.0.4'
+    //
+    implementation 'uk.co.samuelwall:material-tap-target-prompt:3.0.0'
 }

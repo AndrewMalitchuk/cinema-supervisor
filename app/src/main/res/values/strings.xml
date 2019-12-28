@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">cinema-supervisor</string>
+    <string name="app_name">Cinema Supervisor</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="loginPromptLoginActivityTextViewString">Cinema Ticket App Demo</string>
     <string name="signUpPromptSignUpActivityTextViewString">Create new account</string>

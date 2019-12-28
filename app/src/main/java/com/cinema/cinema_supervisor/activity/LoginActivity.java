@@ -1,4 +1,4 @@
-package com.cinema.cinema_supervisor;
+package com.cinema.cinema_supervisor.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cinema.cinema_supervisor.R;
 import com.dynamitechetan.flowinggradient.FlowingGradientClass;
 import com.example.myloadingbutton.MyLoadingButton;
 
