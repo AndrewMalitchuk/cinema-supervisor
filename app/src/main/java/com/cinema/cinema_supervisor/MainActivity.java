@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.cinema.cinema_supervisor.activity.BottomScanResultActivity;
 import com.cinema.cinema_supervisor.activity.ScanQR;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,6 +16,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        startActivity(new Intent(this, ScanQR.class));
+        startActivity(new Intent(this, BottomScanResultActivity.class));
     }
 }
