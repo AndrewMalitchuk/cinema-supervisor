@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cinema.cinema_supervisor.activity.LoginActivity">
+    tools:context="com.cinema.cinema_supervisor.activity.LoginActivity"
+    tools:ignore="LabelFor">
 
 
     <LinearLayout
@@ -66,6 +67,62 @@
                         android:textSize="30sp"
                         android:textStyle="bold" />
 
+                    <!--<com.google.android.material.textfield.TextInputLayout-->
+                    <!--android:id="@+id/emailLoginActivityTextInputLayout"-->
+                    <!--style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:textColorHint="@color/colorAccent"-->
+                    <!--app:boxStrokeColor="@color/colorAccent"-->
+                    <!--app:hintTextColor="@color/colorAccent">-->
+
+                    <!--<com.google.android.material.textfield.TextInputEditText-->
+                    <!--android:id="@+id/emailLoginActivityTextInputEditText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:backgroundTint="@color/colorAccent"-->
+                    <!--android:hint="@string/emailLoginActivityTextViewString"-->
+                    <!--android:inputType="textEmailAddress"-->
+                    <!--android:textColor="@color/colorLoginActivityFieldsText"-->
+                    <!--android:textColorHighlight="@color/colorAccent" />-->
+
+                    <!--</com.google.android.material.textfield.TextInputLayout>-->
+
+                    <!--<com.google.android.material.textfield.TextInputLayout-->
+                    <!--android:id="@+id/passwordLoginActivityTextInputLayout"-->
+                    <!--style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:textColorHint="@color/colorAccent"-->
+                    <!--app:boxStrokeColor="@color/colorAccent"-->
+                    <!--app:hintTextColor="@color/colorAccent">-->
+
+                    <!--&lt;!&ndash;<com.google.android.material.textfield.TextInputEditText&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/passwordLoginActivityTextInputEditText"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:backgroundTint="@color/colorAccent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:hint="@string/passwordLoginActivityTextViewString"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:inputType="textPassword"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textColor="@color/colorLoginActivityFieldsText" />&ndash;&gt;-->
+
+                    <!--<com.subhrajyoti.passwordview.PasswordView-->
+                    <!--android:id="@+id/passwordView"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="@string/passwordLoginActivityTextViewString"-->
+                    <!--android:shadowColor="@color/about_facebook_color"-->
+                    <!--android:textColor="@color/colorLoginActivityText"-->
+                    <!--app:eyeTint="@color/colorAccent"-->
+                    <!--app:strikeThrough="true" />-->
+
+                    <!--</com.google.android.material.textfield.TextInputLayout>-->
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/emailSignUpActivityTextInputLayout"
@@ -102,7 +159,7 @@
                         android:textColorHint="@color/colorAccent">
 
                         <com.subhrajyoti.passwordview.PasswordView
-                            android:id="@+id/passwordView"
+                            android:id="@+id/passwordSignUpActivityEditText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:colorControlHighlight="@color/colorAccent"
@@ -121,6 +178,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
                         app:mlb_backgroundColor="@color/colorBackground"
                         app:mlb_label="@string/loginLoginActivityButtonString"
                         app:mlb_labelColor="@color/colorLoginActivityCardView"
@@ -130,19 +188,6 @@
                     </com.example.myloadingbutton.MyLoadingButton>
 
 
-                    <TextView
-                        android:id="@+id/signUpLoginActivityTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="20dp"
-                        android:text="@string/signUpLoginActivityTextViewString"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorLoginActivityText"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-
                 </LinearLayout>
 
 
@@ -150,6 +195,5 @@
         </FrameLayout>
 
     </LinearLayout>
-    
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

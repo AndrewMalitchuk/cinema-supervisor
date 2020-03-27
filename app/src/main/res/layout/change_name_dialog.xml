@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.developer.mtextfield.TextFieldBoxes
+        android:id="@+id/text_field_boxes1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        app:hasClearButton="true"
+        app:iconSignifier="@drawable/ic_perm_identity_black_24dp"
+        app:labelText="Your name">
+
+        <com.developer.mtextfield.ExtendedEditText
+            android:id="@+id/extended_edit_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </com.developer.mtextfield.TextFieldBoxes>
+
+
+
+</LinearLayout>

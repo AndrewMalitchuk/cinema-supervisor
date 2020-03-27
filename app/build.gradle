@@ -67,4 +67,45 @@ dependencies {
     implementation 'com.keiferstone:nonet:2.0.4'
     //
     implementation 'uk.co.samuelwall:material-tap-target-prompt:3.0.0'
+    //
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    //
+    implementation 'jp.wasabeef:glide-transformations:4.0.0'
+    //
+
+    implementation 'com.github.Pradyuman7:ChocoBar:V1.0'
+    //
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
+    //
+    implementation 'com.github.nihad92:SwipeableCards:1.0.19'
+    //
+    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
+    //
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.3.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.3.1'
+    //
+    compileOnly "org.projectlombok:lombok:1.18.10"
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+    //
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    //
+    implementation 'com.github.liangpengfei:LoadingPopPoint:912651e54d'
+    //
+    implementation 'com.github.TutorialsAndroid:MTextField:v4.0.19'
+    //
+    implementation 'com.github.jrvansuita:MaterialAbout:+'
+    //
+    implementation 'com.cuneytayyildiz:onboarder:1.0.4'
+    //https://github.com/ReactiveX/RxAndroid
+    implementation "io.reactivex.rxjava2:rxjava:2.0.1"
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
+    //
+    implementation 'com.github.IsPra94:EasyGifView:1.0.1'
+    //
+    implementation 'com.github.abdularis:AnalogTvNoiseView:0.1'
+
 }

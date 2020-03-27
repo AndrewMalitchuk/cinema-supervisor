@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,6 +13,14 @@
 
     <item android:id="@+id/action_feedback"
         android:title="Feedback"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_change_name"
+        android:title="Change name"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_about_developer"
+        android:title="About developer"
         app:showAsAction="never"/>
 
     <item android:id="@+id/action_logout"

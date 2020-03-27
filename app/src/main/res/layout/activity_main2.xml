@@ -7,19 +7,19 @@
     tools:context="com.cinema.cinema_supervisor.activity.Main2Activity">
 
     <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:orientation="vertical">-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical">-->
 
-        <!--<androidx.appcompat.widget.Toolbar-->
-            <!--android:id="@+id/toolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="?attr/colorPrimary"-->
-            <!--android:minHeight="?attr/actionBarSize"-->
-            <!--android:theme="?attr/actionBarTheme" />-->
+    <!--<androidx.appcompat.widget.Toolbar-->
+    <!--android:id="@+id/toolbar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="?attr/colorPrimary"-->
+    <!--android:minHeight="?attr/actionBarSize"-->
+    <!--android:theme="?attr/actionBarTheme" />-->
     <!--</LinearLayout>-->
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -125,16 +125,6 @@
                                     app:border_color="@color/white"
                                     app:shadow_color="@color/white" />
 
-                                <TextView
-                                    android:id="@+id/textView29"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Margot Ivanivna Robbie"
-                                    android:textAlignment="center"
-                                    android:textColor="@color/colorLoginActivityText"
-                                    android:textSize="18sp"
-                                    android:textStyle="bold" />
-
 
                             </LinearLayout>
                         </FrameLayout>
@@ -169,11 +159,11 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/textView"
+                                android:id="@+id/usernameMainActivityTextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="Margot Ivanivna Robbie"
+                                android:text="Loading..."
                                 android:textSize="25sp"
                                 android:textStyle="bold" />
 
@@ -191,10 +181,10 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/textView4"
+                            android:id="@+id/positionMainActivityTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Supervisor" />
+                            android:text="Loading..." />
 
                         <TextView
                             android:id="@+id/textView5"

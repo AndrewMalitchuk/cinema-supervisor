@@ -1,21 +1,30 @@
 package com.cinema.cinema_supervisor.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import com.brouding.simpledialog.SimpleDialog;
 import com.cinema.cinema_supervisor.R;
+import com.cinema.cinema_supervisor.requests.APIInterface;
+import com.developer.mtextfield.ExtendedEditText;
 import com.droidbyme.dialoglib.DroidDialog;
 import com.dynamitechetan.flowinggradient.FlowingGradientClass;
 import com.github.javiersantos.bottomdialogs.BottomDialog;
@@ -27,6 +36,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.markdownview.Config;
 import es.dmoral.markdownview.MarkdownView;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 public class Main2Activity extends AppCompatActivity {
@@ -41,11 +58,25 @@ public class Main2Activity extends AppCompatActivity {
     @BindView(R.id.floatingActionButton3)
     FloatingActionButton floatingActionButton;
 
+    @BindView(R.id.usernameMainActivityTextView)
+    TextView usernameMainActivityTextView;
+
+    @BindView(R.id.positionMainActivityTextView)
+    TextView positionMainActivityTextView;
+
+    public static final String ACCOUNT_PREF = "accountPref";
 
     private SharedPreferences prefForCheckingFirstRun;
     private SharedPreferences.Editor editor;
+    private SharedPreferences pref;
+
+
+    private SharedPreferences sharedpreferences;
+
 
     private boolean firstRun = false;
+
+    private APIInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +88,45 @@ public class Main2Activity extends AppCompatActivity {
 
         prefForCheckingFirstRun = getSharedPreferences("com.cinema.supervisor", MODE_PRIVATE);
 
-        toolbar.setTitle("Hello, $username!");
+
+        pref = getApplicationContext().getSharedPreferences("UserData", 0);
+        editor = pref.edit();
+
+        String userNameFromPreferences = pref.getString("user_name", null);
+        if (userNameFromPreferences != null && !userNameFromPreferences.equals("")) {
+            toolbar.setTitle("Hello, " + userNameFromPreferences);
+        } else {
+            toolbar.setTitle("Hello, $username!");
+        }
+        setSupportActionBar(toolbar);
+
+
+        //
+        apiInterface = com.cinema.cinema_supervisor.requests.APIClient.getClient().create(APIInterface.class);
+        sharedpreferences = getSharedPreferences(ACCOUNT_PREF, Context.MODE_PRIVATE);
+        if (sharedpreferences != null) {
+            String login = sharedpreferences.getString("login", null);
+            String password = sharedpreferences.getString("password", null);
+            int userId = sharedpreferences.getInt("userId", -1);
+
+            Log.d("sdf","OK");
+
+            RequestBody password_ = RequestBody.create(MediaType.parse("text/plain"),
+                    password);
+
+            RequestBody login_ = RequestBody.create(MediaType.parse("text/plain"),
+                    login);
+
+            Observable<com.cinema.client.requests.entities.TokenAPI> tokenRx = apiInterface.refreshTokenRx(login_, password_);
+//
+            tokenRx.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .map(result -> result)
+                    .subscribe(this::onToken);
+        }
+        //
+
+
 
 
         NoNet.configure()
@@ -78,70 +147,125 @@ public class Main2Activity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        toolbar.setOnMenuItemClickListener(item -> {
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
 
-            switch (item.getItemId()) {
-                case R.id.action_settings:
-                    MarkdownView markdownView = new MarkdownView(Main2Activity.this);
-                    markdownView.loadFromText("# Hello!\n ## Hello!");
-                    Config defaultConfig = Config.getDefaultConfig();
-                    defaultConfig.setDefaultMargin(25);
-                    markdownView.setCurrentConfig(defaultConfig);
-                    new SimpleDialog.Builder(Main2Activity.this)
-                            .setTitle("Need help?")
-                            .setCustomView(markdownView)
-                            .setBtnConfirmText("Thanks!")
-                            .setBtnConfirmTextSizeDp(16)
-                            .setBtnConfirmTextColor("#1fd1ab")
-                            .show();
-                    break;
-                case R.id.action_feedback:
-                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                            "mailto", "cinema.app.feedback@gmail.com", null));
-                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Cinema-App Feedback");
-                    emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
-                    startActivity(Intent.createChooser(emailIntent, "Send email..."));
-                    break;
-                case R.id.action_logout:
-                    new DroidDialog.Builder(Main2Activity.this)
-                            .icon(R.drawable.ic_exit_to_app_black_24dp)
-                            .title("Logout")
-                            .content("Are you sure about this?")
-                            .cancelable(true, false)
-                            .positiveButton("Yes, I'm sure", new DroidDialog.onPositiveListener() {
-                                @Override
-                                public void onPositive(Dialog droidDialog) {
-                                    Toast.makeText(Main2Activity.this, "Yes, I'm sure", Toast.LENGTH_SHORT).show();
-                                    //
-                                    startActivity(new Intent(Main2Activity.this, LoginActivity.class));
-                                    //
-                                }
-                            })
-                            .negativeButton("No", new DroidDialog.onNegativeListener() {
-                                @Override
-                                public void onNegative(Dialog droidDialog) {
-                                    Toast.makeText(Main2Activity.this, "No", Toast.LENGTH_SHORT).show();
-                                    //
-                                    Intent intent = getIntent();
-                                    finish();
-                                    startActivity(intent);
-                                    //
-                                }
-                            })
-                            .color(ContextCompat.getColor(Main2Activity.this, R.color.colorAccent), ContextCompat.getColor(Main2Activity.this, R.color.white),
-                                    ContextCompat.getColor(Main2Activity.this, R.color.colorAccent))
-                            .show();
+                switch (item.getItemId()) {
+                    case R.id.action_settings:
+                        MarkdownView markdownView = new MarkdownView(Main2Activity.this);
+                        markdownView.loadFromText("# Hello!\n ## Hello!\n **сюда кинь вступ з звіту**");
+                        Config defaultConfig = Config.getDefaultConfig();
+                        defaultConfig.setDefaultMargin(25);
+                        markdownView.setCurrentConfig(defaultConfig);
+                        new SimpleDialog.Builder(Main2Activity.this)
+                                .setTitle("Need help?")
+                                .setCustomView(markdownView)
+                                .setBtnConfirmText("Thanks!")
+                                .setBtnConfirmTextSizeDp(16)
+                                .setBtnConfirmTextColor("#1fd1ab")
+                                .show();
+                        break;
+                    case R.id.action_feedback:
+                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                                "mailto", "cinema.app.diploma@gmail.com", null));
+//                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Cinema-App Feedback");
+//                        emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
+                        startActivity(Intent.createChooser(emailIntent, "Send email..."));
+                        break;
+                    case R.id.action_change_name:
 
-                    break;
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Main2Activity.this);
+                        builder.setTitle("Your information");
+                        // set the custom layout
+                        final View customLayout = getLayoutInflater().inflate(R.layout.change_name_dialog, null);
+                        builder.setView(customLayout);
+                        // add a button
+                        builder.setPositiveButton("Great!", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // send data from the AlertDialog to the Activity
+                                ExtendedEditText userName = customLayout.findViewById(R.id.extended_edit_text1);
+
+//                                sendDialogDataToActivity(editText.getText().toString());
+                                editor.putString("user_name", userName.getText().toString());
+//                                editor.putString("user_city", userCity.getText().toString());
+                                editor.commit(); // commit changes
+
+                                ChocoBar.builder().setActivity(Main2Activity.this)
+                                        .setText("Success!")
+                                        .setDuration(ChocoBar.LENGTH_SHORT)
+                                        .build()
+                                        .show();
+
+                                Intent intent = getIntent();
+                                finish();
+                                startActivity(intent);
+                            }
+                        });
+                        // create and show the alert dialog
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                        break;
+                    case R.id.action_about_developer:
+                        startActivity(new Intent(Main2Activity.this, AboutDeveloperActivity.class));
+                        break;
+                    case R.id.action_logout:
+                        new DroidDialog.Builder(Main2Activity.this)
+                                .icon(R.drawable.ic_exit_to_app_black_24dp)
+                                .title("Logout")
+                                .content("Are you sure about this?")
+                                .cancelable(true, false)
+                                .positiveButton("Yes, I'm sure", new DroidDialog.onPositiveListener() {
+                                    @Override
+                                    public void onPositive(Dialog droidDialog) {
+                                        Toast.makeText(Main2Activity.this, "Yes, I'm sure", Toast.LENGTH_SHORT).show();
+                                        //
+
+//                                        pref.edit().clear();
+//                                        pref.edit().commit();
+//
+//                                        getSharedPreferences(ACCOUNT_PREF, Context.MODE_PRIVATE).edit().clear();
+//                                        getSharedPreferences(ACCOUNT_PREF, Context.MODE_PRIVATE).edit().remove("login");
+//                                        getSharedPreferences(ACCOUNT_PREF, Context.MODE_PRIVATE).edit().remove("password");
+//                                        getSharedPreferences(ACCOUNT_PREF, Context.MODE_PRIVATE).edit().apply();
+//                                        getSharedPreferences(ACCOUNT_PREF, Context.MODE_PRIVATE).edit().commit();
+
+                                        getApplicationContext().getSharedPreferences("ACCOUNT_PREF", 0).edit().clear().commit();
+
+
+                                        Intent intent = new Intent(Main2Activity.this, LoginActivity.class);
+
+                                        startActivity(intent);
+                                        //
+                                    }
+                                })
+                                .negativeButton("No", new DroidDialog.onNegativeListener() {
+                                    @Override
+                                    public void onNegative(Dialog droidDialog) {
+                                        Toast.makeText(Main2Activity.this, "No", Toast.LENGTH_SHORT).show();
+                                        //
+                                        Intent intent = getIntent();
+                                        finish();
+                                        startActivity(intent);
+                                        //
+                                    }
+                                })
+                                .color(ContextCompat.getColor(Main2Activity.this, R.color.colorAccent), ContextCompat.getColor(Main2Activity.this, R.color.white),
+                                        ContextCompat.getColor(Main2Activity.this, R.color.colorAccent))
+                                .show();
+
+                        break;
+                }
+
+
+                return false;
             }
-
-
-            return false;
         });
 
         if (prefForCheckingFirstRun.getBoolean("firstrun", true) == true) {
 
-            //
+
             new MaterialTapTargetPrompt.Builder(Main2Activity.this)
                     .setTarget(R.id.floatingActionButton3)
                     .setPrimaryText("Send your first email")
@@ -171,6 +295,42 @@ public class Main2Activity extends AppCompatActivity {
         }
 
 
+        //
+
+
+
+        //
+
+
+
+
+    }
+
+    private void onToken(com.cinema.client.requests.entities.TokenAPI tokenAPI) {
+        Call<com.cinema.client.requests.entities.UserAPI> getLoggedUser = apiInterface.getCurrentUser("Bearer " + tokenAPI.getAccess());
+        getLoggedUser.enqueue(new Callback<com.cinema.client.requests.entities.UserAPI>() {
+            @Override
+            public void onResponse(Call<com.cinema.client.requests.entities.UserAPI> call, Response<com.cinema.client.requests.entities.UserAPI> response) {
+                if (response.isSuccessful()) {
+
+
+                    Log.d("is_staff",response.body().getIsStaff()+"");
+
+                    if(response.body().getIsStaff()) {
+
+                        usernameMainActivityTextView.setText(response.body().getLastName()+" "+response.body().getFirstName());
+                        positionMainActivityTextView.setText("Staff");
+
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<com.cinema.client.requests.entities.UserAPI> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
