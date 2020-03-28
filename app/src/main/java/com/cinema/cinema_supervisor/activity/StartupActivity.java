@@ -76,10 +76,10 @@ public class StartupActivity extends OnboarderActivity implements OnboarderPageC
         setOnboarderPageChangeListener(this);
         initOnboardingPages(pages);
 
-        getWindow().setFlags(
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-        );
+//        getWindow().setFlags(
+//                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+//                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+//        );
     }
 
     @Override

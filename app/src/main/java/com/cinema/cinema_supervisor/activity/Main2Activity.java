@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,15 +23,23 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import com.brouding.simpledialog.SimpleDialog;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.cinema.cinema_supervisor.R;
+import com.cinema.cinema_supervisor.requests.APIClient;
 import com.cinema.cinema_supervisor.requests.APIInterface;
+import com.cinema.cinema_supervisor.requests.entities.CinemaAPI;
+import com.cinema.client.requests.entities.TokenAPI;
 import com.developer.mtextfield.ExtendedEditText;
 import com.droidbyme.dialoglib.DroidDialog;
 import com.dynamitechetan.flowinggradient.FlowingGradientClass;
 import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.keiferstone.nonet.NoNet;
+import com.liangfeizc.avatarview.AvatarView;
 import com.pd.chocobar.ChocoBar;
+
+import org.w3c.dom.Text;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,7 +47,9 @@ import es.dmoral.markdownview.Config;
 import es.dmoral.markdownview.MarkdownView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import jp.wasabeef.glide.transformations.BlurTransformation;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -64,6 +75,15 @@ public class Main2Activity extends AppCompatActivity {
     @BindView(R.id.positionMainActivityTextView)
     TextView positionMainActivityTextView;
 
+    @BindView(R.id.imageView5)
+    ImageView blurImageView;
+
+    @BindView(R.id.cinemaPictureCinemaActivityAvatarView)
+    AvatarView cinemaPictureCinemaActivityAvatarView;
+
+    @BindView(R.id.cinemaMainActivityTextView)
+    TextView cinemaMainActivityTextView;
+
     public static final String ACCOUNT_PREF = "accountPref";
 
     private SharedPreferences prefForCheckingFirstRun;
@@ -77,6 +97,11 @@ public class Main2Activity extends AppCompatActivity {
     private boolean firstRun = false;
 
     private APIInterface apiInterface;
+
+
+    private int user_id;
+
+    private CinemaAPI currentCinema;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +132,7 @@ public class Main2Activity extends AppCompatActivity {
         if (sharedpreferences != null) {
             String login = sharedpreferences.getString("login", null);
             String password = sharedpreferences.getString("password", null);
-            int userId = sharedpreferences.getInt("userId", -1);
+            user_id = sharedpreferences.getInt("userId", -1);
 
             Log.d("sdf","OK");
 
@@ -122,7 +147,13 @@ public class Main2Activity extends AppCompatActivity {
             tokenRx.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .map(result -> result)
-                    .subscribe(this::onToken);
+                    .subscribe(new Consumer<TokenAPI>() {
+                        @Override
+                        public void accept(TokenAPI tokenAPI) throws Exception {
+                            onToken(tokenAPI);
+                            getJob(tokenAPI);
+                        }
+                    });
         }
         //
 
@@ -331,6 +362,40 @@ public class Main2Activity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void getJob(TokenAPI tokenAPI){
+        Call<CinemaAPI> getJobCall=apiInterface.getJobByUserId(user_id,"Bearer " + tokenAPI.getAccess());
+        getJobCall.enqueue(new Callback<CinemaAPI>() {
+            @Override
+            public void onResponse(Call<CinemaAPI> call, Response<CinemaAPI> response) {
+                Log.d("cinema",response.body().getName());
+
+                currentCinema=response.body();
+
+                Glide.with(getApplicationContext())
+                        .load(APIClient.HOST + response.body().getPicUrl())
+                        .apply(RequestOptions.bitmapTransform(new BlurTransformation(25, 3)))
+                        .into(blurImageView);
+
+                Glide.with(getApplicationContext()).load(APIClient.HOST + response.body().getPicUrl()).into(cinemaPictureCinemaActivityAvatarView);
+
+                cinemaMainActivityTextView.setText(response.body().getName());
+
+
+            }
+
+            @Override
+            public void onFailure(Call<CinemaAPI> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void onImageClick(View view) {
+        Intent intent = new Intent(Main2Activity.this, ZoomImageActivity.class);
+        intent.putExtra("url", currentCinema.getPicUrl());
+        startActivity(intent);
     }
 
     @Override

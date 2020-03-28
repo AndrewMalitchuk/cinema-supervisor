@@ -28,6 +28,7 @@ public interface APIInterface {
     public static final String api_user = "/api/v1/user/";
     public static final String api_token = "/api/token/";
     public static final String api_hall="/api/v1/hall/";
+    public static final String api_staff="/api/v1/staff/";
 
 
 
@@ -115,6 +116,11 @@ public interface APIInterface {
 
     @GET(api_user)
     Call<com.cinema.client.requests.entities.UserAPI> getCurrentUser(@Header("Authorization") String authHeader);
+
+
+
+    @GET(api_staff)
+    Call<CinemaAPI> getJobByUserId(@Query("user_id") int user_id, @Header("Authorization") String authHeader);
 
 
 }
