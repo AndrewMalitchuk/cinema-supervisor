@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.cinema.cinema_supervisor.R;
 import com.cinema.cinema_supervisor.requests.APIInterface;
+import com.cinema.cinema_supervisor.requests.entities.TokenAPI;
 import com.dynamitechetan.flowinggradient.FlowingGradientClass;
 import com.example.myloadingbutton.MyLoadingButton;
 import com.pd.chocobar.ChocoBar;
@@ -159,10 +160,10 @@ public class LoginActivity extends AppCompatActivity implements
 
 //        String token;
 
-                Call<com.cinema.client.requests.entities.TokenAPI> call = apiInterface.refreshToken(username_, password_);
-                call.enqueue(new Callback<com.cinema.client.requests.entities.TokenAPI>() {
+                Call<TokenAPI> call = apiInterface.refreshToken(username_, password_);
+                call.enqueue(new Callback<TokenAPI>() {
                     @Override
-                    public void onResponse(Call<com.cinema.client.requests.entities.TokenAPI> call, Response<com.cinema.client.requests.entities.TokenAPI> response) {
+                    public void onResponse(Call<TokenAPI> call, Response<TokenAPI> response) {
                         loginLoginActivityButton.showDoneButton();
 
                         if (response.isSuccessful()) {
@@ -276,7 +277,7 @@ public class LoginActivity extends AppCompatActivity implements
                     }
 
                     @Override
-                    public void onFailure(Call<com.cinema.client.requests.entities.TokenAPI> call, Throwable t) {
+                    public void onFailure(Call<TokenAPI> call, Throwable t) {
                         loginLoginActivityButton.showErrorButton();
                         ChocoBar
                                 .builder()

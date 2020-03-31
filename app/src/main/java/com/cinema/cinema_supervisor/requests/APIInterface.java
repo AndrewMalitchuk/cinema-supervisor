@@ -2,6 +2,9 @@ package com.cinema.cinema_supervisor.requests;
 
 
 import com.cinema.cinema_supervisor.requests.entities.CinemaAPI;
+import com.cinema.cinema_supervisor.requests.entities.TicketAPI;
+import com.cinema.cinema_supervisor.requests.entities.TimelineAPI;
+import com.cinema.cinema_supervisor.requests.entities.TokenAPI;
 
 import java.util.List;
 
@@ -34,21 +37,24 @@ public interface APIInterface {
 
 
     @GET(api_ticket)
-    Call<com.cinema.client.requests.entities.TicketAPI> getTicketByCode(@Query("code") String code, @Header("Authorization") String authHeader);
+    Call<TicketAPI> getTicketByCode(@Query("code") String code, @Header("Authorization") String authHeader);
 
     @GET(api_ticket)
-    Call<List<com.cinema.client.requests.entities.TicketAPI>> getTicketByUserId(@Query("user_id") int user_id, @Header("Authorization") String authHeader);
+    Observable<TicketAPI> getTicketByCodeRx(@Query("code") String code, @Header("Authorization") String authHeader);
 
     @GET(api_ticket)
-    Observable<List<com.cinema.client.requests.entities.TicketAPI>> getTicketByUserIdRx(@Query("user_id") int user_id, @Header("Authorization") String authHeader);
+    Call<List<TicketAPI>> getTicketByUserId(@Query("user_id") int user_id, @Header("Authorization") String authHeader);
+
+    @GET(api_ticket)
+    Observable<List<TicketAPI>> getTicketByUserIdRx(@Query("user_id") int user_id, @Header("Authorization") String authHeader);
 
     @POST(api_ticket)
-    Call<com.cinema.client.requests.entities.TicketAPI> updateTicketById(@Query("id") int id, @Body com.cinema.client.requests.entities.TicketAPI ticket);
+    Call<TicketAPI> updateTicketById(@Query("id") int id, @Body TicketAPI ticket);
 
 
     @Multipart
     @POST(api_ticket)
-    Call<com.cinema.client.requests.entities.TicketAPI> createTicket(@Part("place") RequestBody place,
+    Call<TicketAPI> createTicket(@Part("place") RequestBody place,
                                                                      @Part("code") RequestBody code,
                                                                      @Part("status") RequestBody status,
                                                                      @Part("user") RequestBody user,
@@ -58,7 +64,7 @@ public interface APIInterface {
 
     @Multipart
     @PUT(api_ticket)
-    Call<com.cinema.client.requests.entities.TicketAPI> updateTicket(@Query("id") int id,
+    Call<TicketAPI> updateTicket(@Query("id") int id,
                                                                      @Part("place") RequestBody place,
                                                                      @Part("code") RequestBody code,
                                                                      @Part("status") RequestBody status,
@@ -70,13 +76,42 @@ public interface APIInterface {
 
     @Multipart
     @PUT(api_ticket)
-    Call<com.cinema.client.requests.entities.TicketAPI> updateTicket(@Query("id") int id,
-                                                                     @Part("place") RequestBody place,
-                                                                     @Part("code") RequestBody code,
-                                                                     @Part("status") RequestBody status,
-                                                                     @Part("timeline_id") RequestBody timeline_id,
-                                                                     @Part("user") RequestBody user,
-                                                                     @Header("Authorization") String authHeader);
+    Call<TicketAPI> updateTicket(@Query("id") int id,
+                                 @Part("place") RequestBody place,
+                                 @Part("code") RequestBody code,
+                                 @Part("status") RequestBody status,
+                                 @Part("timeline_id") RequestBody timeline_id,
+                                 @Part("user") RequestBody user,
+                                 @Header("Authorization") String authHeader);
+
+
+    @GET(api_timeline)
+    Call<List<TimelineAPI>> getTimeline();
+
+    @GET(api_timeline)
+    Call<List<TimelineAPI>> getTimelineByCinemaId(@Query("cinema_id") int cinema_id);
+
+    @GET(api_timeline)
+    Observable<TimelineAPI> getTimelineByIdRx(@Query("id") int id);
+
+    @GET(api_timeline)
+    Call<TimelineAPI> getTimelineById(@Query("id") int id);
+
+
+
+    @GET(api_timeline)
+    Call<List<TimelineAPI>> getTimelineByCinemaIdAndFilmId(@Query("cinema_id") int cinema_id, @Query("film_id") int film_id);
+
+    @GET(api_timeline)
+    Call<TimelineAPI> getTimelineByCinemaIdAndFilmIdAndDate(@Query("cinema_id") int cinema_id, @Query("film_id") int film_id, @Query("date") String date);
+
+    @GET(api_timeline)
+    Call<List<TimelineAPI>> getTimelineByDateAndCinemaId(@Query("date") String date, @Query("cinema_id") int cinema_id);
+
+    @GET(api_timeline)
+    Call<List<TimelineAPI>> getTimelineByDateAndCinemaIdAndFilmId(@Query("date") String date, @Query("cinema_id") int cinema_id, @Query("film_id") int film_id);
+
+
 
 
     @GET(api_cinema)
@@ -103,13 +138,13 @@ public interface APIInterface {
 
     @Multipart
     @POST(api_token)
-    Call<com.cinema.client.requests.entities.TokenAPI> refreshToken(
+    Call<TokenAPI> refreshToken(
             @Part("username") RequestBody username,
             @Part("password") RequestBody password);
 
     @Multipart
     @POST(api_token)
-    Observable<com.cinema.client.requests.entities.TokenAPI> refreshTokenRx(
+    Observable<TokenAPI> refreshTokenRx(
             @Part("username") RequestBody username,
             @Part("password") RequestBody password);
 

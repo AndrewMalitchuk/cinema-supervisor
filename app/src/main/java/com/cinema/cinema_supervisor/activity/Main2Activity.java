@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -29,7 +30,9 @@ import com.cinema.cinema_supervisor.R;
 import com.cinema.cinema_supervisor.requests.APIClient;
 import com.cinema.cinema_supervisor.requests.APIInterface;
 import com.cinema.cinema_supervisor.requests.entities.CinemaAPI;
-import com.cinema.client.requests.entities.TokenAPI;
+import com.cinema.cinema_supervisor.requests.entities.TicketAPI;
+import com.cinema.cinema_supervisor.requests.entities.TimelineAPI;
+import com.cinema.cinema_supervisor.requests.entities.TokenAPI;
 import com.developer.mtextfield.ExtendedEditText;
 import com.droidbyme.dialoglib.DroidDialog;
 import com.dynamitechetan.flowinggradient.FlowingGradientClass;
@@ -103,6 +106,9 @@ public class Main2Activity extends AppCompatActivity {
 
     private CinemaAPI currentCinema;
 
+    private String ticketCode;
+    private String sitPlace;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,7 +140,7 @@ public class Main2Activity extends AppCompatActivity {
             String password = sharedpreferences.getString("password", null);
             user_id = sharedpreferences.getInt("userId", -1);
 
-            Log.d("sdf","OK");
+            Log.d("sdf", "OK");
 
             RequestBody password_ = RequestBody.create(MediaType.parse("text/plain"),
                     password);
@@ -142,7 +148,7 @@ public class Main2Activity extends AppCompatActivity {
             RequestBody login_ = RequestBody.create(MediaType.parse("text/plain"),
                     login);
 
-            Observable<com.cinema.client.requests.entities.TokenAPI> tokenRx = apiInterface.refreshTokenRx(login_, password_);
+            Observable<TokenAPI> tokenRx = apiInterface.refreshTokenRx(login_, password_);
 //
             tokenRx.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -156,8 +162,6 @@ public class Main2Activity extends AppCompatActivity {
                     });
         }
         //
-
-
 
 
         NoNet.configure()
@@ -329,15 +333,12 @@ public class Main2Activity extends AppCompatActivity {
         //
 
 
-
         //
-
-
 
 
     }
 
-    private void onToken(com.cinema.client.requests.entities.TokenAPI tokenAPI) {
+    private void onToken(TokenAPI tokenAPI) {
         Call<com.cinema.client.requests.entities.UserAPI> getLoggedUser = apiInterface.getCurrentUser("Bearer " + tokenAPI.getAccess());
         getLoggedUser.enqueue(new Callback<com.cinema.client.requests.entities.UserAPI>() {
             @Override
@@ -345,11 +346,11 @@ public class Main2Activity extends AppCompatActivity {
                 if (response.isSuccessful()) {
 
 
-                    Log.d("is_staff",response.body().getIsStaff()+"");
+                    Log.d("is_staff", response.body().getIsStaff() + "");
 
-                    if(response.body().getIsStaff()) {
+                    if (response.body().getIsStaff()) {
 
-                        usernameMainActivityTextView.setText(response.body().getLastName()+" "+response.body().getFirstName());
+                        usernameMainActivityTextView.setText(response.body().getLastName() + " " + response.body().getFirstName());
                         positionMainActivityTextView.setText("Staff");
 
 
@@ -364,14 +365,14 @@ public class Main2Activity extends AppCompatActivity {
         });
     }
 
-    private void getJob(TokenAPI tokenAPI){
-        Call<CinemaAPI> getJobCall=apiInterface.getJobByUserId(user_id,"Bearer " + tokenAPI.getAccess());
+    private void getJob(TokenAPI tokenAPI) {
+        Call<CinemaAPI> getJobCall = apiInterface.getJobByUserId(user_id, "Bearer " + tokenAPI.getAccess());
         getJobCall.enqueue(new Callback<CinemaAPI>() {
             @Override
             public void onResponse(Call<CinemaAPI> call, Response<CinemaAPI> response) {
-                Log.d("cinema",response.body().getName());
+                Log.d("cinema", response.body().getName());
 
-                currentCinema=response.body();
+                currentCinema = response.body();
 
                 Glide.with(getApplicationContext())
                         .load(APIClient.HOST + response.body().getPicUrl())
@@ -423,19 +424,103 @@ public class Main2Activity extends AppCompatActivity {
         String barCode = data.getStringExtra("barcode");
         String barCodeType = data.getStringExtra("barType");
 
+        Log.d("barcode", barCode);
+        ticketCode=barCode;
+
+
+        String login = sharedpreferences.getString("login", null);
+        String password = sharedpreferences.getString("password", null);
+        user_id = sharedpreferences.getInt("userId", -1);
+
+        Log.d("sdf", "OK");
+
+        RequestBody password_ = RequestBody.create(MediaType.parse("text/plain"),
+                password);
+
+        RequestBody login_ = RequestBody.create(MediaType.parse("text/plain"),
+                login);
+
+        Observable<TokenAPI> tokenRx = apiInterface.refreshTokenRx(login_, password_);
+//
+        tokenRx.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(result -> result)
+                .subscribe(this::ticketToken);
+
+
+
+
+
+    }
+
+    private void ticketToken(TokenAPI tokenAPI) {
+
+        Observable<TicketAPI> ticketRx = apiInterface.getTicketByCodeRx(ticketCode,"Bearer " + tokenAPI.getAccess());
+
+        ticketRx.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(result -> result)
+                .subscribe(new Consumer<TicketAPI>() {
+                    @Override
+                    public void accept(TicketAPI ticketAPI) throws Exception {
+                        sitPlace=ticketAPI.getPlace();
+                        Log.d("sit",sitPlace);
+
+                        Observable<TimelineAPI> timelineRx = apiInterface.getTimelineByIdRx(ticketAPI.getTimeline_id());
+
+                        timelineRx.subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .map(result -> result)
+                                .subscribe(new Consumer<TimelineAPI>() {
+                                    @Override
+                                    public void accept(TimelineAPI timelineAPI) throws Exception {
+                                        Log.d("cin_id",timelineAPI.getCinemaId()+"");
+                                        Log.d("status",ticketAPI.getStatus()+"");
+
+                                        if(currentCinema.getId()==timelineAPI.getCinemaId()){
+                                            if(ticketAPI.getStatus()==2) {
+                                                Toast.makeText(Main2Activity.this, "Luck!", Toast.LENGTH_SHORT).show();
+                                                onTicketRequestResult(ticketAPI);
+                                            }else{
+                                                ChocoBar.builder().setActivity(Main2Activity.this)
+                                                        .setText("Warning! The ticket is used!")
+                                                        .setDuration(ChocoBar.LENGTH_SHORT)
+                                                        .orange()
+                                                        .show();
+                                            }
+                                        }else{
+                                            Toast.makeText(Main2Activity.this, "Try Again", Toast.LENGTH_SHORT).show();
+                                            ChocoBar.builder().setActivity(Main2Activity.this)
+                                                    .setText("Error!\nTicket is from another cinema!")
+                                                    .setDuration(ChocoBar.LENGTH_SHORT)
+                                                    .red()
+                                                    .show();
+                                        }
+
+                                    }
+                                });
+
+                    }
+                });
+
+    }
+
+    private void onTicketRequestResult(TicketAPI ticketAPI){
+
         new BottomDialog.Builder(this)
                 .setTitle("QR scan info")
 //                .setContent("Film: Once upon a time in Hollywood\nDate: 10-10-10\nPlace: c-10-10\nCosmos")
-                .setContent("Barcode: " + barCode + "\nType: " + barCodeType)
+                .setContent("Barcode: " + ticketAPI.getCode() + "\nPlace: "+ticketAPI.getPlace())
                 .setPositiveText("Submit")
                 .setPositiveBackgroundColorResource(R.color.colorAccent)
                 .setPositiveTextColorResource(android.R.color.white)
-                .onPositive(dialog -> ChocoBar.builder().setActivity(Main2Activity.this)
-                        .setText("Submitted!")
-                        .setDuration(ChocoBar.LENGTH_SHORT)
-                        .green()
-                        .show())
-                .setNegativeText("Ignore")
+                .onPositive(new BottomDialog.ButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull BottomDialog bottomDialog) {
+
+                    }
+                })
+                .setNegativeText("Cancel")
                 .setNegativeTextColorResource(R.color.colorPrimary)
                 .onNegative(dialog -> ChocoBar.builder().setActivity(Main2Activity.this)
                         .setText("Ignored!")
@@ -444,8 +529,6 @@ public class Main2Activity extends AppCompatActivity {
                         .show())
                 .setCancelable(false)
                 .show();
-
-
     }
 
     @Override

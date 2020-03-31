@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.cinema.cinema_supervisor.R;
 import com.cinema.cinema_supervisor.requests.APIInterface;
+import com.cinema.cinema_supervisor.requests.entities.TokenAPI;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -62,10 +63,10 @@ public class SplashActivity extends AppCompatActivity {
 
                 Log.d("splash",password+" "+login);
 
-                Call<com.cinema.client.requests.entities.TokenAPI> call=apiInterface.refreshToken(login_,password_);
-                call.enqueue(new Callback<com.cinema.client.requests.entities.TokenAPI>() {
+                Call<TokenAPI> call=apiInterface.refreshToken(login_,password_);
+                call.enqueue(new Callback<TokenAPI>() {
                     @Override
-                    public void onResponse(Call<com.cinema.client.requests.entities.TokenAPI> call, Response<com.cinema.client.requests.entities.TokenAPI> response) {
+                    public void onResponse(Call<TokenAPI> call, Response<TokenAPI> response) {
                         if(response.isSuccessful()){
                             Intent intent=new Intent(SplashActivity.this,Main2Activity.class);
                             startActivity(intent);
@@ -73,7 +74,7 @@ public class SplashActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<com.cinema.client.requests.entities.TokenAPI> call, Throwable t) {
+                    public void onFailure(Call<TokenAPI> call, Throwable t) {
                         Log.d("FROM","2");
                         Intent intent=new Intent(SplashActivity.this, LoginActivity.class);
                         startActivity(intent);
