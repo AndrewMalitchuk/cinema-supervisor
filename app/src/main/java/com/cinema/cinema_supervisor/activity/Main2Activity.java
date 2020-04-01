@@ -507,6 +507,8 @@ public class Main2Activity extends AppCompatActivity {
 
     private void onTicketRequestResult(TicketAPI ticketAPI){
 
+
+
         new BottomDialog.Builder(this)
                 .setTitle("QR scan info")
 //                .setContent("Film: Once upon a time in Hollywood\nDate: 10-10-10\nPlace: c-10-10\nCosmos")
@@ -517,6 +519,55 @@ public class Main2Activity extends AppCompatActivity {
                 .onPositive(new BottomDialog.ButtonCallback() {
                     @Override
                     public void onClick(@NonNull BottomDialog bottomDialog) {
+
+
+                        String login = sharedpreferences.getString("login", null);
+                        String password = sharedpreferences.getString("password", null);
+
+                        RequestBody password_ = RequestBody.create(MediaType.parse("text/plain"),
+                                password);
+
+                        RequestBody login_ = RequestBody.create(MediaType.parse("text/plain"),
+                                login);
+
+                        Observable<TokenAPI> tokenRx = apiInterface.refreshTokenRx(login_, password_);
+//
+                        tokenRx.subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .map(result -> result)
+                                .subscribe(tokenAPI -> {
+                                    Call<TicketAPI> call=apiInterface.updateTicket(
+                                            ticketAPI.getId(),
+                                            RequestBody.create(MediaType.parse("text/plain"),ticketAPI.getPlace()),
+                                            RequestBody.create(MediaType.parse("text/plain"),ticketAPI.getCode()),
+                                            RequestBody.create(MediaType.parse("text/plain"),"3"),
+                                            RequestBody.create(MediaType.parse("text/plain"),ticketAPI.getTimeline_id().toString()),
+                                            RequestBody.create(MediaType.parse("text/plain"),ticketAPI.getUser().toString()),
+                                            "Bearer "+tokenAPI.getAccess());
+                                    call.enqueue(new Callback<TicketAPI>() {
+                                        @Override
+                                        public void onResponse(Call<TicketAPI> call, Response<TicketAPI> response) {
+                                            ChocoBar.builder().setActivity(Main2Activity.this)
+                                                    .setText("Success!")
+                                                    .setDuration(ChocoBar.LENGTH_SHORT)
+                                                    .green()
+                                                    .show();
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<TicketAPI> call, Throwable t) {
+
+                                        }
+                                    });
+
+                        });
+
+
+
+
+
+
+
 
                     }
                 })
