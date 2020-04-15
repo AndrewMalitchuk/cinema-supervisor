@@ -113,5 +113,9 @@ dependencies {
     implementation 'jp.wasabeef:glide-transformations:4.0.0'
     //
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+    //
+    implementation 'com.github.nonzeroapps:whatisnewdialog:1.0.4'
+    // https://android-arsenal.com/details/1/6093
+    implementation 'com.github.ravindu1024:android-loadingdialog:1.0.3'
 
 }

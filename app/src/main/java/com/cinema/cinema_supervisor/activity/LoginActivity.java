@@ -114,7 +114,6 @@ public class LoginActivity extends AppCompatActivity implements
 
     @Override
     public void onMyLoadingButtonClick() {
-        Toast.makeText(this, "MyLoadingButton Click", Toast.LENGTH_SHORT).show();
 
         //
         // https://www.woolha.com/tutorials/android-retrofit-2-refresh-access-token-with-okhttpclient-and-authenticator
@@ -168,7 +167,6 @@ public class LoginActivity extends AppCompatActivity implements
 
                         if (response.isSuccessful()) {
 
-                            Log.d("TOKEN", response.body().getAccess());
 //                token=response.body().getAccess();
                             sharedpreferences_access = getSharedPreferences(ACCESS_TOKEN_PREF, Context.MODE_PRIVATE);
                             sharedpreferences_token = getSharedPreferences(REFRESH_TOKEN_PREF, Context.MODE_PRIVATE);
@@ -198,13 +196,11 @@ public class LoginActivity extends AppCompatActivity implements
                                     if (response.isSuccessful()) {
 
 
-                                        Log.d("is_staff",response.body().getIsStaff()+"");
 
                                         if(response.body().getIsStaff()) {
 
                                             SharedPreferences.Editor editor = sharedpreferences.edit();
                                             editor.putInt("userId", response.body().getId());
-                                            Log.d("id", response.body().getId().toString());
                                             editor.commit();
                                         }else{
                                             loginLoginActivityButton.showErrorButton();
@@ -224,6 +220,9 @@ public class LoginActivity extends AppCompatActivity implements
 
                                 @Override
                                 public void onFailure(Call<com.cinema.client.requests.entities.UserAPI> call, Throwable t) {
+                                    Intent intent = new Intent(LoginActivity.this,ErrorActivity.class);
+                                    intent.putExtra("isNetworkError",true);
+                                    startActivity(intent);
 
                                 }
                             });

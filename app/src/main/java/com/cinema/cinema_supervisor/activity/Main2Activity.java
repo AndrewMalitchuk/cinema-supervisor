@@ -1,6 +1,7 @@
 package com.cinema.cinema_supervisor.activity;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import com.brouding.simpledialog.SimpleDialog;
@@ -41,6 +44,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.keiferstone.nonet.NoNet;
 import com.liangfeizc.avatarview.AvatarView;
 import com.pd.chocobar.ChocoBar;
+import com.rw.loadingdialog.LoadingView;
 
 import org.w3c.dom.Text;
 
@@ -109,6 +113,12 @@ public class Main2Activity extends AppCompatActivity {
     private String ticketCode;
     private String sitPlace;
 
+    LoadingView loadingView;
+
+
+    @BindView(R.id.frame)
+    ConstraintLayout frame;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,6 +142,12 @@ public class Main2Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+        loadingView = new LoadingView.Builder(this)
+                .setProgressColorResource(R.color.colorAccent)
+                .setProgressStyle(LoadingView.ProgressStyle.CYCLIC)
+                .attachTo(frame);
+
+
         //
         apiInterface = com.cinema.cinema_supervisor.requests.APIClient.getClient().create(APIInterface.class);
         sharedpreferences = getSharedPreferences(ACCOUNT_PREF, Context.MODE_PRIVATE);
@@ -140,7 +156,6 @@ public class Main2Activity extends AppCompatActivity {
             String password = sharedpreferences.getString("password", null);
             user_id = sharedpreferences.getInt("userId", -1);
 
-            Log.d("sdf", "OK");
 
             RequestBody password_ = RequestBody.create(MediaType.parse("text/plain"),
                     password);
@@ -195,10 +210,10 @@ public class Main2Activity extends AppCompatActivity {
                         markdownView.setCurrentConfig(defaultConfig);
                         new SimpleDialog.Builder(Main2Activity.this)
                                 .setTitle("Need help?")
-                                .setCustomView(markdownView)
+                                .setContent(getResources().getString(R.string.help_text))
                                 .setBtnConfirmText("Thanks!")
                                 .setBtnConfirmTextSizeDp(16)
-                                .setBtnConfirmTextColor("#1fd1ab")
+                                .setBtnConfirmTextColor("#D81B60")
                                 .show();
                         break;
                     case R.id.action_feedback:
@@ -254,7 +269,6 @@ public class Main2Activity extends AppCompatActivity {
                                 .positiveButton("Yes, I'm sure", new DroidDialog.onPositiveListener() {
                                     @Override
                                     public void onPositive(Dialog droidDialog) {
-                                        Toast.makeText(Main2Activity.this, "Yes, I'm sure", Toast.LENGTH_SHORT).show();
                                         //
 
 //                                        pref.edit().clear();
@@ -266,7 +280,10 @@ public class Main2Activity extends AppCompatActivity {
 //                                        getSharedPreferences(ACCOUNT_PREF, Context.MODE_PRIVATE).edit().apply();
 //                                        getSharedPreferences(ACCOUNT_PREF, Context.MODE_PRIVATE).edit().commit();
 
+
                                         getApplicationContext().getSharedPreferences("ACCOUNT_PREF", 0).edit().clear().commit();
+                                        getApplicationContext().getSharedPreferences("firstrun", 0).edit().clear().commit();
+                                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().commit();
 
 
                                         Intent intent = new Intent(Main2Activity.this, LoginActivity.class);
@@ -278,7 +295,6 @@ public class Main2Activity extends AppCompatActivity {
                                 .negativeButton("No", new DroidDialog.onNegativeListener() {
                                     @Override
                                     public void onNegative(Dialog droidDialog) {
-                                        Toast.makeText(Main2Activity.this, "No", Toast.LENGTH_SHORT).show();
                                         //
                                         Intent intent = getIntent();
                                         finish();
@@ -298,36 +314,36 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
-        if (prefForCheckingFirstRun.getBoolean("firstrun", true) == true) {
-
-
-            new MaterialTapTargetPrompt.Builder(Main2Activity.this)
-                    .setTarget(R.id.floatingActionButton3)
-                    .setPrimaryText("Send your first email")
-                    .setSecondaryText("Tap the envelope to start composing your first email")
-                    .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
-                        @Override
-                        public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                            if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED) {
-                                new MaterialTapTargetPrompt.Builder(Main2Activity.this)
-                                        .setTarget(R.id.toolbar)
-                                        .setPrimaryText("Send your first email")
-                                        .setSecondaryText("Tap the envelope to start composing your first email")
-//                                        .setIcon(R.drawable.ic_account_circle_black_24dp)
-                                        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
-                                            @Override
-                                            public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                                                if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED) {
-                                                    // User has pressed the prompt target
-                                                }
-                                            }
-                                        })
-                                        .show();
-                            }
-                        }
-                    })
-                    .show();
-        }
+//        if (prefForCheckingFirstRun.getBoolean("firstrun", true) == true) {
+//
+//
+//            new MaterialTapTargetPrompt.Builder(Main2Activity.this)
+//                    .setTarget(R.id.floatingActionButton3)
+//                    .setPrimaryText("Send your first email")
+//                    .setSecondaryText("Tap the envelope to start composing your first email")
+//                    .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+//                        @Override
+//                        public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+//                            if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED) {
+//                                new MaterialTapTargetPrompt.Builder(Main2Activity.this)
+//                                        .setTarget(R.id.toolbar)
+//                                        .setPrimaryText("Send your first email")
+//                                        .setSecondaryText("Tap the envelope to start composing your first email")
+////                                        .setIcon(R.drawable.ic_account_circle_black_24dp)
+//                                        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+//                                            @Override
+//                                            public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+//                                                if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED) {
+//                                                    // User has pressed the prompt target
+//                                                }
+//                                            }
+//                                        })
+//                                        .show();
+//                            }
+//                        }
+//                    })
+//                    .show();
+//        }
 
 
         //
@@ -346,7 +362,6 @@ public class Main2Activity extends AppCompatActivity {
                 if (response.isSuccessful()) {
 
 
-                    Log.d("is_staff", response.body().getIsStaff() + "");
 
                     if (response.body().getIsStaff()) {
 
@@ -360,6 +375,9 @@ public class Main2Activity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<com.cinema.client.requests.entities.UserAPI> call, Throwable t) {
+                Intent intent = new Intent(Main2Activity.this,ErrorActivity.class);
+                intent.putExtra("isAppError",true);
+                startActivity(intent);
 
             }
         });
@@ -370,7 +388,6 @@ public class Main2Activity extends AppCompatActivity {
         getJobCall.enqueue(new Callback<CinemaAPI>() {
             @Override
             public void onResponse(Call<CinemaAPI> call, Response<CinemaAPI> response) {
-                Log.d("cinema", response.body().getName());
 
                 currentCinema = response.body();
 
@@ -388,7 +405,9 @@ public class Main2Activity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<CinemaAPI> call, Throwable t) {
-
+                Intent intent = new Intent(Main2Activity.this,ErrorActivity.class);
+                intent.putExtra("isNetworkError",true);
+                startActivity(intent);
             }
         });
     }
@@ -424,7 +443,6 @@ public class Main2Activity extends AppCompatActivity {
         String barCode = data.getStringExtra("barcode");
         String barCodeType = data.getStringExtra("barType");
 
-        Log.d("barcode", barCode);
         ticketCode=barCode;
 
 
@@ -432,7 +450,6 @@ public class Main2Activity extends AppCompatActivity {
         String password = sharedpreferences.getString("password", null);
         user_id = sharedpreferences.getInt("userId", -1);
 
-        Log.d("sdf", "OK");
 
         RequestBody password_ = RequestBody.create(MediaType.parse("text/plain"),
                 password);
@@ -464,7 +481,6 @@ public class Main2Activity extends AppCompatActivity {
                     @Override
                     public void accept(TicketAPI ticketAPI) throws Exception {
                         sitPlace=ticketAPI.getPlace();
-                        Log.d("sit",sitPlace);
 
                         Observable<TimelineAPI> timelineRx = apiInterface.getTimelineByIdRx(ticketAPI.getTimeline_id());
 
@@ -474,12 +490,9 @@ public class Main2Activity extends AppCompatActivity {
                                 .subscribe(new Consumer<TimelineAPI>() {
                                     @Override
                                     public void accept(TimelineAPI timelineAPI) throws Exception {
-                                        Log.d("cin_id",timelineAPI.getCinemaId()+"");
-                                        Log.d("status",ticketAPI.getStatus()+"");
 
                                         if(currentCinema.getId()==timelineAPI.getCinemaId()){
                                             if(ticketAPI.getStatus()==2) {
-                                                Toast.makeText(Main2Activity.this, "Luck!", Toast.LENGTH_SHORT).show();
                                                 onTicketRequestResult(ticketAPI);
                                             }else{
                                                 ChocoBar.builder().setActivity(Main2Activity.this)
@@ -489,7 +502,6 @@ public class Main2Activity extends AppCompatActivity {
                                                         .show();
                                             }
                                         }else{
-                                            Toast.makeText(Main2Activity.this, "Try Again", Toast.LENGTH_SHORT).show();
                                             ChocoBar.builder().setActivity(Main2Activity.this)
                                                     .setText("Error!\nTicket is from another cinema!")
                                                     .setDuration(ChocoBar.LENGTH_SHORT)
@@ -521,6 +533,9 @@ public class Main2Activity extends AppCompatActivity {
                     public void onClick(@NonNull BottomDialog bottomDialog) {
 
 
+
+                        loadingView.show();
+
                         String login = sharedpreferences.getString("login", null);
                         String password = sharedpreferences.getString("password", null);
 
@@ -535,6 +550,9 @@ public class Main2Activity extends AppCompatActivity {
                         tokenRx.subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .map(result -> result)
+                                .doOnComplete(() -> {
+                                    loadingView.hide();
+                                })
                                 .subscribe(tokenAPI -> {
                                     Call<TicketAPI> call=apiInterface.updateTicket(
                                             ticketAPI.getId(),
@@ -556,6 +574,9 @@ public class Main2Activity extends AppCompatActivity {
 
                                         @Override
                                         public void onFailure(Call<TicketAPI> call, Throwable t) {
+                                            loadingView.hide();
+                                            Intent intent = new Intent(Main2Activity.this,ErrorActivity.class);
+                                            startActivity(intent);
 
                                         }
                                     });
@@ -586,10 +607,66 @@ public class Main2Activity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if (prefForCheckingFirstRun.getBoolean("firstrun", true)) {
-            // Do first run stuff here then set 'firstrun' as false
-            // using the following line to edit/commit prefs
-            prefForCheckingFirstRun.edit().putBoolean("firstrun", false).commit();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Main2Activity.this);
+        boolean previouslyStarted = prefs.getBoolean("firstrun", false);
+        if (!previouslyStarted) {
+            SharedPreferences.Editor edit = prefs.edit();
+            edit.putBoolean("firstrun", Boolean.TRUE);
+            edit.commit();
+            firstrun();
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
+    public void firstrun() {
+        new MaterialTapTargetPrompt.Builder(Main2Activity.this)
+                .setTarget(R.id.floatingActionButton3)
+                .setPrimaryText("Scan tickets")
+                .setSecondaryText("Tap to scan tickets")
+                .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                    @Override
+                    public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                        if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED) {
+                            ChocoBar.builder().setActivity(Main2Activity.this)
+                                    .setText("Congratulations!\nFeel yourself at home!")
+                                    .setDuration(ChocoBar.LENGTH_SHORT)
+                                    .green()
+                                    .show();
+
+                            //
+                            DroidDialog dialog = new DroidDialog.Builder(Main2Activity.this)
+                                    .icon(R.drawable.ic_help_outline_white_24dp)
+                                    .title("Congratulations")
+                                    .content("Want to see introduction?")
+                                    .cancelable(true, false)
+                                    .positiveButton("Yes, I'm sure", new DroidDialog.onPositiveListener() {
+                                        @Override
+                                        public void onPositive(Dialog droidDialog) {
+                                            droidDialog.cancel();
+
+                                            startActivity(new Intent(Main2Activity.this,StartupActivity.class));
+                                        }
+                                    })
+                                    .negativeButton("No, it was a mistake", new DroidDialog.onNegativeListener() {
+                                        @Override
+                                        public void onNegative(Dialog droidDialog) {
+                                            //
+
+                                            //
+                                        }
+                                    })
+                                    .color(ContextCompat.getColor(Main2Activity.this, R.color.colorAccent),
+                                            ContextCompat.getColor(Main2Activity.this, R.color.white),
+                                            ContextCompat.getColor(Main2Activity.this, R.color.colorAccent))
+                                    .show();
+                        }
+                    }
+                })
+                .show();
     }
 }

@@ -85,7 +85,6 @@ public class StartupActivity extends OnboarderActivity implements OnboarderPageC
     @Override
     public void onFinishButtonPressed() {
         // implement your logic, save induction has done to sharedPrefs
-        Toast.makeText(this, "Finish button was pressed", Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(this, Main2Activity.class);
         startActivity(intent);
@@ -96,7 +95,6 @@ public class StartupActivity extends OnboarderActivity implements OnboarderPageC
     protected void onSkipButtonPressed() {
         super.onSkipButtonPressed();
 
-        Toast.makeText(this, "Ok, bro, your time is very important for us!", Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(this, Main2Activity.class);
         startActivity(intent);
@@ -104,7 +102,6 @@ public class StartupActivity extends OnboarderActivity implements OnboarderPageC
 
     @Override
     public void onPageChanged(int position) {
-//        Toast.makeText(this, "onPageChanged: " + position, Toast.LENGTH_SHORT).show();
     }
 }
 

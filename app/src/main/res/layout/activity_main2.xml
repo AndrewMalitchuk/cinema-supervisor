@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cinema.cinema_supervisor.activity.Main2Activity">
+    tools:context="com.cinema.cinema_supervisor.activity.Main2Activity"
+    android:id="@+id/frame">
 
     <!--<LinearLayout-->
     <!--android:layout_width="match_parent"-->
@@ -128,15 +129,7 @@
                                     app:border_color="@color/colorAccent"
                                     app:shadow_color="@color/colorAccent" />
 
-                                <!--<TextView-->
-                                <!--android:id="@+id/cinemaNameCinemaActivityTextView"-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:text="Loading..."-->
-                                <!--android:textAlignment="center"-->
-                                <!--android:textColor="@color/colorAccent"-->
-                                <!--android:textSize="18sp"-->
-                                <!--android:textStyle="bold" />-->
+
 
 
                             </LinearLayout>
@@ -176,7 +169,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="Loading..."
+                                android:text="@string/loading_message"
                                 android:textSize="25sp"
                                 android:textStyle="bold" />
 
@@ -197,7 +190,7 @@
                             android:id="@+id/positionMainActivityTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Loading..." />
+                            android:text="@string/loading_message" />
 
                         <TextView
                             android:id="@+id/textView5"
@@ -213,7 +206,7 @@
                             android:id="@+id/cinemaMainActivityTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Loading..." />
+                            android:text="@string/loading_message" />
 
 
                     </LinearLayout>

@@ -53,7 +53,6 @@
         <activity
             android:name=".activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
