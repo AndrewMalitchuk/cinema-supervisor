@@ -219,8 +219,6 @@ public class Main2Activity extends AppCompatActivity {
                     case R.id.action_feedback:
                         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                                 "mailto", "cinema.app.diploma@gmail.com", null));
-//                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Cinema-App Feedback");
-//                        emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
                         startActivity(Intent.createChooser(emailIntent, "Send email..."));
                         break;
                     case R.id.action_change_name:

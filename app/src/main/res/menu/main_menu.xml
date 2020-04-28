@@ -7,24 +7,24 @@
 
     <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/action_settings"
-        android:title="Help"
+        android:title="@string/helpMenuItem"
         android:icon="@drawable/ic_help_outline_white_24dp"
         app:showAsAction="ifRoom"/>
 
     <item android:id="@+id/action_feedback"
-        android:title="Feedback"
+        android:title="@string/feedbackMenuItem"
         app:showAsAction="never"/>
 
     <item android:id="@+id/action_change_name"
-        android:title="Change name"
+        android:title="@string/changeNameMenuItem"
         app:showAsAction="never"/>
 
     <item android:id="@+id/action_about_developer"
-        android:title="About developer"
+        android:title="@string/aboutDevMenuItem"
         app:showAsAction="never"/>
 
     <item android:id="@+id/action_logout"
-        android:title="Logout"
+        android:title="@string/logoutMenuItem"
         app:showAsAction="never"/>
 
 

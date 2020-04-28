@@ -15,7 +15,7 @@
         android:layout_marginBottom="5dp"
         app:hasClearButton="true"
         app:iconSignifier="@drawable/ic_perm_identity_black_24dp"
-        app:labelText="Your name">
+        app:labelText="@string/changeNameDialogTextView">
 
         <com.developer.mtextfield.ExtendedEditText
             android:id="@+id/extended_edit_text1"

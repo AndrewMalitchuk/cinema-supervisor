@@ -63,7 +63,7 @@
                         android:layout_weight="1"
                         android:backgroundTint="@color/colorAccent"
                         android:onClick="onUnderstandButtonClick"
-                        android:text="understand and forgive"
+                        android:text="@string/understandErrorActivityButton"
                         android:textColor="@color/white" />
                 </FrameLayout>
 

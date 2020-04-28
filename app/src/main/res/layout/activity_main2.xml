@@ -7,20 +7,7 @@
     tools:context="com.cinema.cinema_supervisor.activity.Main2Activity"
     android:id="@+id/frame">
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:orientation="vertical">-->
 
-    <!--<androidx.appcompat.widget.Toolbar-->
-    <!--android:id="@+id/toolbar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="?attr/colorPrimary"-->
-    <!--android:minHeight="?attr/actionBarSize"-->
-    <!--android:theme="?attr/actionBarTheme" />-->
-    <!--</LinearLayout>-->
-    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -182,7 +169,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
                             android:layout_marginBottom="20dp"
-                            android:text="Position:"
+                            android:text="@string/positionMainActivityTextView"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -198,7 +185,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
                             android:layout_marginBottom="20dp"
-                            android:text="Place of work:"
+                            android:text="@string/placeMainActivityTextView"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 

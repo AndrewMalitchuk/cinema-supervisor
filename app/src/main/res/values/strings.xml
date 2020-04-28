@@ -25,4 +25,19 @@
 
     <string name="loading_message">Loading...</string>
 
+    <string name="understandErrorActivityButton">understand and forgive</string>
+
+    <string name="positionMainActivityTextView">Position:</string>
+    <string name="placeMainActivityTextView">Place of work:</string>
+
+    <string name="changeNameDialogTextView">Your name</string>
+
+    <string name="versionSplachActivityTextView">version 0.1</string>
+
+    <string name="helpMenuItem">Help</string>
+    <string name="feedbackMenuItem">Feedback</string>
+    <string name="changeNameMenuItem">Change name</string>
+    <string name="aboutDevMenuItem">About developer</string>
+    <string name="logoutMenuItem">Logout</string>
+
 </resources>
