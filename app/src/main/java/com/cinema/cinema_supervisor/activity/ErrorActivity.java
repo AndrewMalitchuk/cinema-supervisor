@@ -15,7 +15,6 @@ import butterknife.ButterKnife;
 
 public class ErrorActivity extends AppCompatActivity {
 
-
     @BindView(R.id.errorTitle)
     TextView errorTitle;
 
@@ -26,42 +25,27 @@ public class ErrorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_error);
-
         ButterKnife.bind(this);
-
-
-        boolean isNetworkError=getIntent().getBooleanExtra("isNetworkError",false);
-        boolean isAppError=getIntent().getBooleanExtra("isAppError",false);
-
+        boolean isNetworkError = getIntent().getBooleanExtra("isNetworkError", false);
+        boolean isAppError = getIntent().getBooleanExtra("isAppError", false);
         EasyGifView easyGifView = (EasyGifView) findViewById(R.id.easyGifView);
-
-        if(!isAppError&&!isNetworkError){
-            easyGifView.setGifFromResource(R.drawable.cat_fail_0); //Your own GIF file from Resources
+        if (!isAppError && !isNetworkError) {
+            easyGifView.setGifFromResource(R.drawable.cat_fail_0);
             errorTitle.setText("The weather on Mars has changed");
             errorDescription.setText("We do not know what happened, but we are correcting it already.");
-        }else if(isAppError){
-            easyGifView.setGifFromResource(R.drawable.app_error); //Your own GIF file from Resources
+        } else if (isAppError) {
+            easyGifView.setGifFromResource(R.drawable.app_error);
             errorTitle.setText("It's fine");
             errorDescription.setText("Programs are created by human beings, and human beings are fallible.");
-        }else{
-            easyGifView.setGifFromResource(R.drawable.net_error); //Your own GIF file from Resources
+        } else {
+            easyGifView.setGifFromResource(R.drawable.net_error);
             errorTitle.setText("You are in the Mesozoic");
             errorDescription.setText("Maybe talk to others, and in the meantime, the Internet will appear");
         }
-
-
-
-
-
-
-//        getWindow().setFlags(
-//                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-//                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-//        );
     }
 
-    public void onUnderstandButtonClick(View view){
-        Intent intent=new Intent(this,Main2Activity.class);
+    public void onUnderstandButtonClick(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

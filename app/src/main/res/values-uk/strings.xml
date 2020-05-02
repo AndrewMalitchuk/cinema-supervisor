@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cinema Supervisor</string>
+    <string name="aboutDevMenuItem">Розробник</string>
+    <string name="changeNameDialogTextView">Ваше ім\'я</string>
+    <string name="changeNameMenuItem">Змінити ім\'я</string>
+    <string name="connectWithUsAboutActivityString">Зв\'яжіться з нами</string>
+    <string name="descriptionAboutActivityString">Опис</string>
+    <string name="emailLoginActivityTextViewString">Пошта</string>
+    <string name="emailLoginActivityTextViewStringHint">Ваша адреса</string>
+    <string name="feedbackMenuItem">Відгук</string>
+    <string name="helpMenuItem">Допомога</string>
+    <string name="loading_message">Завантаження...</string>
+    <string name="loginLoginActivityButtonString">Вхід</string>
+    <string name="loginSignUpActivityTextViewString"><u>Вже зареєстровані?</u></string>
+    <string name="logoutMenuItem">Вихід</string>
+    <string name="newAccountSignUpActivityImageViewString">Створити новий аккаунт</string>
+    <string name="passwordLoginActivityTextViewString">Пароль</string>
+    <string name="passwordLoginActivityTextViewStringHint">Ваш пароль</string>
+    <string name="placeMainActivityTextView">Місце роботи:</string>
+    <string name="positionMainActivityTextView">Посада:</string>
+    <string name="signUpLoginActivityTextViewString"><u>Зареєструватися?</u></string>
+    <string name="signUpPromptSignUpActivityTextViewString">Створити новий акаунт</string>
+    <string name="signUpSignUpActivityButtonString">Зареєструватися</string>
+    <string name="ticketLoginActivityImageViewString">Зображення білету</string>
+    <string name="understandErrorActivityButton">зрозуміти та простити</string>
+    <string name="versionSplachActivityTextView">версія 0.1</string>
+</resources>

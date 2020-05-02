@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
@@ -22,7 +21,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -30,90 +28,85 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-
-    //https://github.com/yatindeokar/MyLoadingButton
+    // https://github.com/yatindeokar/MyLoadingButton
     implementation 'com.github.yatindeokar:MyLoadingButton:v1.0.1'
     // https://android-arsenal.com/details/1/3984?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+Android_Arsenal+%28The+Android+Arsenal%29
     implementation 'com.dynamitechetan.flowinggradient:flowinggradient:1.1'
-    //
+    // https://github.com/JakeWharton/butterknife
     implementation 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
-    //
+    // Support Library
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-
-    //
     implementation 'com.google.android.material:material:1.0.0-beta01'
-    //
+    // https://github.com/SubhrajyotiSen/PasswordView
     implementation 'com.github.SubhrajyotiSen:library:1.1.2'
-    //
+    // https://github.com/yuriy-budiyev/code-scanner
     implementation 'com.budiyev.android:code-scanner:2.1.0'
-    //
+    // https://github.com/javiersantos/BottomDialogs
     implementation "com.github.javiersantos:BottomDialogs:1.2.1"
-    //
+    // https://github.com/GrenderG/MarkdownView
     implementation 'com.github.GrenderG:MarkdownView:0.1.2'
-    //
+    // https://github.com/BROUDING/SimpleDialog
     implementation 'com.brouding:android-simple-dialog:0.3.1'
-    //
+    // https://github.com/droidbyme/DroidDialog
     implementation 'com.github.droidbyme:DroidDialog:c6decc7167'
-    //
+    // https://github.com/liangfeidotme/AndroidAvatarView
     implementation 'com.liangfeizc:avatarview:0.0.1@aar'
-    //
+    // https://github.com/Pradyuman7/ChocoBar
     implementation 'com.github.Pradyuman7:ChocoBar:V1.0'
     // https://android-arsenal.com/details/1/5219?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+Android_Arsenal+%28The+Android+Arsenal%29
     implementation 'com.keiferstone:nonet:2.0.4'
-    //
+    // https://github.com/sjwall/MaterialTapTargetPrompt
     implementation 'uk.co.samuelwall:material-tap-target-prompt:3.0.0'
-    //
+    // https://github.com/ReactiveX/RxAndroid
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    //
+    // https://github.com/wasabeef/glide-transformations
     implementation 'jp.wasabeef:glide-transformations:4.0.0'
-    //
-
+    // https://github.com/Pradyuman7/ChocoBar
     implementation 'com.github.Pradyuman7:ChocoBar:V1.0'
-    //
+    // https://github.com/google/gson
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
-    //
+    // https://github.com/nihad92/SwipeableCards
     implementation 'com.github.nihad92:SwipeableCards:1.0.19'
-    //
+    // https://github.com/square/retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
-    //
+    // https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor
     implementation 'com.squareup.okhttp3:logging-interceptor:4.3.1'
     implementation 'com.squareup.okhttp3:okhttp:4.3.1'
-    //
+    // org.projectlombok:lombok
     compileOnly "org.projectlombok:lombok:1.18.10"
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
-    //
+    // https://github.com/bumptech/glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
-    //
+    // https://github.com/liangpengfei/LoadingPopPoint
     implementation 'com.github.liangpengfei:LoadingPopPoint:912651e54d'
-    //
+    // https://github.com/TutorialsAndroid/MTextField
     implementation 'com.github.TutorialsAndroid:MTextField:v4.0.19'
-    //
+    // https://github.com/jrvansuita/MaterialAbout
     implementation 'com.github.jrvansuita:MaterialAbout:+'
-    //
+    // https://github.com/Swisyn/Android-Onboarder
     implementation 'com.cuneytayyildiz:onboarder:1.0.4'
-    //https://github.com/ReactiveX/RxAndroid
+    // https://github.com/ReactiveX/RxAndroid
     implementation "io.reactivex.rxjava2:rxjava:2.0.1"
     implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
-    //
+    // https://github.com/IamIsPra/EasyGifView
     implementation 'com.github.IsPra94:EasyGifView:1.0.1'
-    //
+    // https://github.com/abdularis/AnalogTvNoiseView
     implementation 'com.github.abdularis:AnalogTvNoiseView:0.1'
-    //
+    // https://github.com/bumptech/glide
     implementation 'com.github.bumptech.glide:glide:3.7.0'
-    //    implementation 'com.eightbitlab:supportrenderscriptblur:1.0.2'
+    // https://github.com/wasabeef/glide-transformations
     implementation 'jp.wasabeef:glide-transformations:4.0.0'
-    //
+    // https://github.com/chrisbanes/PhotoView
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
-    //
+    // https://github.com/nonzeroapps/whatisnewdialog
     implementation 'com.github.nonzeroapps:whatisnewdialog:1.0.4'
     // https://android-arsenal.com/details/1/6093
     implementation 'com.github.ravindu1024:android-loadingdialog:1.0.3'

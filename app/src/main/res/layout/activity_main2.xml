@@ -2,13 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cinema.cinema_supervisor.activity.Main2Activity"
-    android:id="@+id/frame">
-
-
-
+    tools:context="com.cinema.cinema_supervisor.activity.MainActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton3"
@@ -38,7 +35,6 @@
         app:subtitleTextColor="@color/white"
         app:titleTextColor="@color/white" />
 
-
     <ScrollView
         android:id="@+id/mScrollView"
         android:layout_width="wrap_content"
@@ -47,7 +43,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
 
         <RelativeLayout
             android:id="@+id/activity_main"
@@ -92,12 +87,7 @@
                                 android:id="@+id/imageView5"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-
                                 android:scaleType="fitXY" />
-
-
-
-
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -116,13 +106,11 @@
                                     app:border_color="@color/colorAccent"
                                     app:shadow_color="@color/colorAccent" />
 
-
-
-
                             </LinearLayout>
-                        </FrameLayout>
-                    </androidx.cardview.widget.CardView>
 
+                        </FrameLayout>
+
+                    </androidx.cardview.widget.CardView>
 
                 </FrameLayout>
 
@@ -145,7 +133,6 @@
                         android:orientation="vertical"
                         android:padding="20dp">
 
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -159,7 +146,6 @@
                                 android:text="@string/loading_message"
                                 android:textSize="25sp"
                                 android:textStyle="bold" />
-
 
                         </LinearLayout>
 
@@ -195,16 +181,13 @@
                             android:layout_height="wrap_content"
                             android:text="@string/loading_message" />
 
-
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
 
-
             </LinearLayout>
 
         </RelativeLayout>
-
 
     </ScrollView>
 
