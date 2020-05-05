@@ -1,6 +1,5 @@
 package com.cinema.cinema_supervisor.requests.entities;
 
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

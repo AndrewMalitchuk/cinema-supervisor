@@ -23,19 +23,11 @@ public class ZoomImageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zoom_image);
-
         ButterKnife.bind(this);
-
-//        PhotoView photoView = (PhotoView) findViewById(R.id.filmPosterZoomActivityPhotoView);
-
-//        photoView.setImageResource(R.drawable.once_upon_a_time);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         String url= APIClient.HOST+getIntent().getStringExtra("url");
         Glide.with(this).load(url).into(filmPosterZoomActivityPhotoView);
-
     }
-
 
 }

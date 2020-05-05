@@ -16,19 +16,6 @@ public class TimelineAPI {
     @Expose
     private Integer id;
 
-//    @Getter
-//    @Setter
-//    @SerializedName("time")
-//    @Expose
-//    private String time;
-//
-//    @Getter
-//    @Setter
-//    @SerializedName("date")
-//    @Expose
-//    private String date;
-
-
     @Getter
     @Setter
     @SerializedName("datetime")
@@ -52,5 +39,6 @@ public class TimelineAPI {
     @SerializedName("price")
     @Expose
     private Double price;
+
 }
 

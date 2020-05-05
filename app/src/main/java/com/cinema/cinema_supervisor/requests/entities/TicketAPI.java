@@ -28,29 +28,11 @@ public class TicketAPI {
     @Expose
     private String code;
 
-//    @Getter
-//    @Setter
-//    @SerializedName("date")
-//    @Expose
-//    private String date;
-
     @Getter
     @Setter
     @SerializedName("status")
     @Expose
     private Integer status;
-
-//    @Getter
-//    @Setter
-//    @SerializedName("cinema_id")
-//    @Expose
-//    private Integer cinemaId;
-//
-//    @Getter
-//    @Setter
-//    @SerializedName("film_id")
-//    @Expose
-//    private Integer filmId;
 
     @Getter
     @Setter
@@ -63,7 +45,5 @@ public class TicketAPI {
     @SerializedName("timeline_id")
     @Expose
     private Integer timeline_id;
-
-
 
 }

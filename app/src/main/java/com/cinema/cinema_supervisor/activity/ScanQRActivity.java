@@ -31,7 +31,9 @@ public class ScanQRActivity extends AppCompatActivity {
     private CodeScanner mCodeScanner;
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
+
     public static final String ALLOW_KEY = "ALLOWED";
+
     public static final String CAMERA_PREF = "camera_pref";
 
     @Override
@@ -75,6 +77,7 @@ public class ScanQRActivity extends AppCompatActivity {
                             setResult(ScanQRActivity.RESULT_OK, resultIntent);
                             finish();
                         }
+
                     });
                 }
             });
@@ -84,10 +87,18 @@ public class ScanQRActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     mCodeScanner.startPreview();
                 }
+
             });
         }
     }
 
+    /**
+     * Save scanned code to SharedPreference
+     *
+     * @param context
+     * @param key
+     * @param allowed
+     */
     public static void saveToPreferences(Context context, String key, Boolean allowed) {
         SharedPreferences myPrefs = context.getSharedPreferences
                 (CAMERA_PREF, Context.MODE_PRIVATE);
@@ -96,6 +107,13 @@ public class ScanQRActivity extends AppCompatActivity {
         prefsEditor.commit();
     }
 
+    /**
+     * Get passed data from SharedPreference
+     *
+     * @param context
+     * @param key
+     * @return
+     */
     public static Boolean getFromPref(Context context, String key) {
         SharedPreferences myPrefs = context.getSharedPreferences
                 (CAMERA_PREF, Context.MODE_PRIVATE);
@@ -103,13 +121,12 @@ public class ScanQRActivity extends AppCompatActivity {
     }
 
     /**
-     * Show alert dialog for permissions access
+     * Show alert dialog with camera's permission
      */
     private void showAlert() {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Camera permission");
         alertDialog.setMessage("Camera permission");
-//        alertDialog.setMessage(getResources().getString(R.string.cameraPermission));
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "DONT ALLOW",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -131,14 +148,12 @@ public class ScanQRActivity extends AppCompatActivity {
     }
 
     /**
-     * Show alert dialog
+     * Show alert dialog with camera's permission
      */
     private void showSettingsAlert() {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Camera permission");
-//        alertDialog.setTitle(R.string.alert);
         alertDialog.setMessage("Camera permission");
-//        alertDialog.setMessage(getResources().getString(R.string.cameraPermission));
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "DONT ALLOW",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {

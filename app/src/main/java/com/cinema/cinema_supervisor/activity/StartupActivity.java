@@ -1,11 +1,7 @@
 package com.cinema.cinema_supervisor.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.cinema.cinema_supervisor.R;
 import com.cuneytayyildiz.onboarder.OnboarderActivity;
@@ -20,7 +16,6 @@ public class StartupActivity extends OnboarderActivity implements OnboarderPageC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         List<OnboarderPage> pages = Arrays.asList(
                 new OnboarderPage.Builder()
                         .title("Cinema-App")
@@ -75,33 +70,25 @@ public class StartupActivity extends OnboarderActivity implements OnboarderPageC
         );
         setOnboarderPageChangeListener(this);
         initOnboardingPages(pages);
-
-//        getWindow().setFlags(
-//                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-//                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-//        );
     }
 
     @Override
     public void onFinishButtonPressed() {
-        // implement your logic, save induction has done to sharedPrefs
-
-        Intent intent = new Intent(this, Main2Activity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-
     }
 
     @Override
     protected void onSkipButtonPressed() {
         super.onSkipButtonPressed();
-
-
-        Intent intent = new Intent(this, Main2Activity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void onPageChanged(int position) {
+
     }
+
 }
 

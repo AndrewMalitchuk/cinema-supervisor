@@ -4,28 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.luasoftware.luapass.MainActivity">
 
-
-    <!-- Settings, should always be in the overflow -->
-    <item android:id="@+id/action_settings"
-        android:title="@string/helpMenuItem"
+    <item
+        android:id="@+id/action_settings"
         android:icon="@drawable/ic_help_outline_white_24dp"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/helpMenuItem"
+        app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/action_feedback"
+    <item
+        android:id="@+id/action_feedback"
         android:title="@string/feedbackMenuItem"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
-    <item android:id="@+id/action_change_name"
+    <item
+        android:id="@+id/action_change_name"
         android:title="@string/changeNameMenuItem"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
-    <item android:id="@+id/action_about_developer"
+    <item
+        android:id="@+id/action_about_developer"
         android:title="@string/aboutDevMenuItem"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
-    <item android:id="@+id/action_logout"
+    <item
+        android:id="@+id/action_logout"
         android:title="@string/logoutMenuItem"
-        app:showAsAction="never"/>
-
+        app:showAsAction="never" />
 
 </menu>

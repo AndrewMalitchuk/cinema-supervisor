@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context="com.cinema.cinema_supervisor.activity.LoginActivity"
-    tools:ignore="LabelFor"
-    android:fillViewport="true">
-
+    tools:ignore="LabelFor">
 
     <LinearLayout
         android:id="@+id/loginLinearLayout"
@@ -68,8 +67,6 @@
                         android:textSize="30sp"
                         android:textStyle="bold" />
 
-
-
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/emailSignUpActivityTextInputLayout"
                         android:layout_width="match_parent"
@@ -92,7 +89,6 @@
                             tools:targetApi="o" />
 
                     </com.google.android.material.textfield.TextInputLayout>
-
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/passwordSignUpActivityTextInputLayout"
@@ -133,9 +129,7 @@
 
                     </com.example.myloadingbutton.MyLoadingButton>
 
-
                 </LinearLayout>
-
 
             </androidx.cardview.widget.CardView>
         </FrameLayout>
