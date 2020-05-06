@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context="com.cinema.cinema_supervisor.activity.LoginActivity"
+    tools:ignore="LabelFor">
+
+    <LinearLayout
+        android:id="@+id/loginLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/loginCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:foregroundGravity="center"
+                app:cardBackgroundColor="@color/colorLoginActivityCardView"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        app:cardBackgroundColor="@color/colorAccent"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="5dp">
+
+                        <ImageView
+                            android:id="@+id/ticketLoginActivityImageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:layout_margin="50dp"
+                            android:contentDescription="@string/ticketLoginActivityImageViewString"
+                            app:srcCompat="@drawable/ic_ticket_white" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/loginPromptLoginActivityTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/app_title"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorLoginActivityFieldsText"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/emailSignUpActivityTextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:hint="@string/emailLoginActivityTextViewString"
+                        android:textColorHint="@color/colorAccent">
+
+                        <EditText
+                            android:id="@+id/emailSignUpActivityEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autofillHints=""
+                            android:backgroundTint="@color/colorAccent"
+                            android:inputType="textEmailAddress"
+                            android:singleLine="true"
+                            android:textColor="@color/colorLoginActivityFieldsText"
+                            tools:targetApi="o" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/passwordSignUpActivityTextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:hint="@string/passwordLoginActivityTextViewString"
+                        android:textColorHint="@color/colorAccent">
+
+                        <com.subhrajyoti.passwordview.PasswordView
+                            android:id="@+id/passwordSignUpActivityEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:colorControlHighlight="@color/colorAccent"
+                            android:textColor="@color/colorLoginActivityText"
+
+                            android:textCursorDrawable="@null"
+                            app:eyeTint="@color/colorAccent"
+                            app:strikeThrough="true" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.example.myloadingbutton.MyLoadingButton
+                        android:id="@+id/loginLoginActivityButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        app:mlb_backgroundColor="@color/colorBackground"
+                        app:mlb_label="@string/loginLoginActivityButtonString"
+                        app:mlb_labelColor="@color/colorLoginActivityCardView"
+                        app:mlb_loaderColor="@color/colorLoginActivityCardView"
+                        app:mlb_setNormalAfterError="true">
+
+                    </com.example.myloadingbutton.MyLoadingButton>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </FrameLayout>
+
+    </LinearLayout>
+
+</ScrollView>

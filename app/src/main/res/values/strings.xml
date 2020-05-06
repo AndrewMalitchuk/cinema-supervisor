@@ -1,3 +1,32 @@
 <resources>
-    <string name="app_name">cinema-supervisor</string>
+    <string name="app_name">Cinema Supervisor</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="loginPromptLoginActivityTextViewString">Cinema Ticket App Demo</string>
+    <string name="signUpPromptSignUpActivityTextViewString">Create new account</string>
+    <string name="loginLoginActivityButtonString">Login</string>
+    <string name="signUpSignUpActivityButtonString">Sign-up</string>
+    <string name="signUpLoginActivityTextViewString"><u>Sign-up?</u></string>
+    <string name="emailLoginActivityTextViewString">Email</string>
+    <string name="emailLoginActivityTextViewStringHint">Your email</string>
+    <string name="passwordLoginActivityTextViewString">Password</string>
+    <string name="passwordLoginActivityTextViewStringHint">Your password</string>
+    <string name="ticketLoginActivityImageViewString">Ticket picture</string>
+    <string name="newAccountSignUpActivityImageViewString">Create new account</string>
+    <string name="loginSignUpActivityTextViewString"><u>Already have an account?</u></string>
+    <string name="connectWithUsAboutActivityString">Connect with us</string>
+    <string name="descriptionAboutActivityString">Description</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="help_text">Mетою даного дипломного проекту є демонстрація отриманих знань та навичок для побудови складної інформаційної системи для надання кінцевим користувачам всіх необхідних функціональних можливостей для купівлі/бронювання квитків онлайн.\n\nГоловне завдання дипломного проекту – реалізувати проект, який буде справно функіонувати, виконувати всі поставлені вимоги та задовільняти потреби користувачів; іншими словами – виконати всі необхідні дії починаючи від етапу формування ідеї та технічного завдання закінчюючи тестуванням та розгортанням розробленої програмної системи та її компнетів.</string>
+    <string name="app_title">cinema-app</string>
+    <string name="loading_message">Loading...</string>
+    <string name="understandErrorActivityButton">understand and forgive</string>
+    <string name="positionMainActivityTextView">Position:</string>
+    <string name="placeMainActivityTextView">Place of work:</string>
+    <string name="changeNameDialogTextView">Your name</string>
+    <string name="versionSplachActivityTextView">version 0.1</string>
+    <string name="helpMenuItem">Help</string>
+    <string name="feedbackMenuItem">Feedback</string>
+    <string name="changeNameMenuItem">Change name</string>
+    <string name="aboutDevMenuItem">About developer</string>
+    <string name="logoutMenuItem">Logout</string>
 </resources>
