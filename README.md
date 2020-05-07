@@ -11,7 +11,7 @@ This is a part of Bachelor diploma project "cinema-app" which consist of:
 * [mobile client for supervisor/conductor](https://github.com/AndrewMalitchuk/cinema-supervisor);
 * [simple web client](https://github.com/AndrewMalitchuk/cinema-server-monolith).
 
-This project is a [REST API]() client for Android OS, and aimed for conductor/supervisor (cinemas' staff) for checking e-tickets (QR-codes) via scanning. [Here]() you can check JavaDoc. 
+This project is a REST API client for Android OS, and aimed for conductor/supervisor (cinemas' staff) for checking e-tickets (QR-codes) via scanning. [Here](https://andrewmalitchuk.github.io/cinema-supervisor/) you can check JavaDoc. 
 
 You can see simple demo below or [download video](https://github.com/AndrewMalitchuk/cinema-client/blob/documentation/README/1.mp4). 
 
