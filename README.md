@@ -43,7 +43,7 @@ You can see simple demo below or [download video](https://github.com/AndrewMalit
 
 ## Installation & Usage
 
-You can download apk file in [release]().
+You can download apk file in [release](https://github.com/AndrewMalitchuk/cinema-supervisor/releases).
 
 ## System requirment
 
@@ -58,4 +58,4 @@ Please make sure to update tests as appropriate.
 
 ## License
 
-cinema-client under the [Apache License, version 2.0 ]().
+cinema-client under the [Apache License, version 2.0 ](https://github.com/AndrewMalitchuk/cinema-supervisor/blob/master/LICENSE).
